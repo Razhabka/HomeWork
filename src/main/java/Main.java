@@ -13,7 +13,7 @@ public class Main {
         employeesList[4] = new Employee("Sverchkov", "Egor", "Aleksandrovich", "Developer", "EgorDev@gmail.com", 880055535, 30, 32);
 
 
-        Park disney = new Park("Disnay Land", "Street 6", "10:00AM - 6:00PM");
+        Park disney = new Park("Disney Land", "Street 6", "10:00AM - 6:00PM");
 
         System.out.println();
         System.out.println(disney.ferrisWheel.getFerrisWheelPrice());
