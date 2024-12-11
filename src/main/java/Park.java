@@ -16,18 +16,14 @@ public class Park {
 
 
     public class FerrisWheel {
-        private String ferrisWheelWorkTime;
-        private String ferrisWheelDescription;
-        private String ferrisWheelPrice;
+        private String ferrisWheelWorkTime = "10:00AM - 6:00PM";
+        private String ferrisWheelPrice = "10$";
 
 
         public String getFerrisWheelWorkTime() {
             return ferrisWheelWorkTime;
         }
 
-        public String getFerrisWheelDescription() {
-            return ferrisWheelDescription;
-        }
 
         public String getFerrisWheelPrice() {
             return ferrisWheelPrice;
@@ -37,9 +33,6 @@ public class Park {
             this.ferrisWheelWorkTime = ferrisWheelWorkTime;
         }
 
-        public void setFerrisWheelDescription(String ferrisWheelDescription) {
-            this.ferrisWheelDescription = ferrisWheelDescription;
-        }
 
         public void setFerrisWheelPrice(String ferrisWheelPrice) {
             this.ferrisWheelPrice = ferrisWheelPrice;
@@ -47,16 +40,12 @@ public class Park {
     }
 
     public class ShootingGallery {
-        private String shootingGalleryWorkTime;// Время работы аттракциона
-        private String shootingGalleryDescription; // Описание аттракциона
-        private String shootingGalleryPrice; // Цена аттракциона
+        private String shootingGalleryWorkTime = "10:00AM - 6:00PM";// Время работы аттракциона
+
+        private String shootingGalleryPrice = "5$"; // Цена аттракциона
 
         public String getShootingGalleryWorkTime() {
             return shootingGalleryWorkTime;
-        }
-
-        public String getShootingGalleryDescription() {
-            return shootingGalleryDescription;
         }
 
         public String getShootingGalleryPrice() {
@@ -65,10 +54,6 @@ public class Park {
 
         public void setShootingGalleryWorkTime(String shootingGalleryWorkTime) {
             this.shootingGalleryWorkTime = shootingGalleryWorkTime;
-        }
-
-        public void setShootingGalleryDescription(String shootingGalleryDescription) {
-            this.shootingGalleryDescription = shootingGalleryDescription;
         }
 
         public void setShootingGalleryPrice(String shootingGalleryPrice) {
