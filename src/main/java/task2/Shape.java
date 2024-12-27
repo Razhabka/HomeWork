@@ -2,15 +2,19 @@ package task2;
 
 public interface Shape {
 
-    void setFillColor();
-    void setBorderColor();
+    void setFillColor(String color);
+
+    void setBorderColor(String color);
 
     String getFillColor();
-    String getBorderColor();
-    double getPerimeter();
-    double getArea();
 
-    default double perimeterCalculation(){
+    String getBorderColor();
+
+    default double perimeterCalculation() {
+        return 0.0;
+    }
+
+    default double areaCalculation() {
         return 0.0;
     }
 }

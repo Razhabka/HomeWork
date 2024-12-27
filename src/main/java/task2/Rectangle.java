@@ -1,14 +1,15 @@
 package task2;
 
-public class Triangle implements Shape {
-    private double sideLeft, footing, sideRight, height;
+public class Rectangle implements Shape {
+
+    private double sideA, sideB, sideC, sideD;
     private String fillColor, borderColor;
 
-    public Triangle(double sideLeft, double footing, double sideRight, double height, String fillColor, String borderColor) {
-        this.sideLeft = sideLeft;
-        this.footing = footing;
-        this.sideRight = sideRight;
-        this.height = height;
+    public Rectangle(double sideA, double sideB, double sideC, double sideD, String fillColor, String borderColor) {
+        this.sideA = sideA;
+        this.sideB = sideB;
+        this.sideC = sideC;
+        this.sideD = sideD;
         this.fillColor = fillColor;
         this.borderColor = borderColor;
     }
@@ -35,13 +36,11 @@ public class Triangle implements Shape {
 
     @Override
     public double perimeterCalculation() {
-        return sideLeft + sideRight + footing;
+        return sideA + sideB + sideC + sideD;
     }
 
     @Override
     public double areaCalculation() {
-        return footing * height / 2;
+        return sideA * sideB * sideC * sideD;
     }
-
-
 }

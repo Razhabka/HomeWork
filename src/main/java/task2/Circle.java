@@ -1,14 +1,12 @@
 package task2;
 
-public class Triangle implements Shape {
-    private double sideLeft, footing, sideRight, height;
+public class Circle implements Shape {
+    private double radius;
+    private final double PI = 3.14;
     private String fillColor, borderColor;
 
-    public Triangle(double sideLeft, double footing, double sideRight, double height, String fillColor, String borderColor) {
-        this.sideLeft = sideLeft;
-        this.footing = footing;
-        this.sideRight = sideRight;
-        this.height = height;
+    public Circle(double radius, String fillColor, String borderColor) {
+        this.radius = radius;
         this.fillColor = fillColor;
         this.borderColor = borderColor;
     }
@@ -35,13 +33,11 @@ public class Triangle implements Shape {
 
     @Override
     public double perimeterCalculation() {
-        return sideLeft + sideRight + footing;
+        return 2 * PI * radius;
     }
 
     @Override
     public double areaCalculation() {
-        return footing * height / 2;
+        return PI * (radius * radius);
     }
-
-
 }
