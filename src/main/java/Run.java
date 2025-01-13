@@ -5,7 +5,7 @@ public class Run {
                 {{"4", "7", "100", "24"},
                 {"54", "73", "46", "52"},
                 {"9", "63", "23", "73"},
-                {"2", "28", "44", "23" ,"35",}};
+                {"2", "28", "44", "23"}};
         try {
             System.out.println(arraySum(array));
         } catch (MyArraySizeException | MyArrayDataException e) {
