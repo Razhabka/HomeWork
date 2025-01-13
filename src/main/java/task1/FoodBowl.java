@@ -2,13 +2,11 @@ package task1;
 
 public class FoodBowl {
 
-    private boolean isEmpty = true;
     private int countFood = 0;
 
     FoodBowl(int food) {
         if (food > 0) {
             this.countFood = food;
-            isEmpty = false;
         }
     }
 
@@ -17,9 +15,8 @@ public class FoodBowl {
     }
 
     public void putFoodInBowl(int countFood) {
-        if (isEmpty && (countFood > 0)) {
+        if (countFood > 0) {
             this.countFood = countFood;
-            isEmpty = false;
         } else if (countFood > 0) {
             this.countFood += countFood;
         } else {
@@ -28,7 +25,7 @@ public class FoodBowl {
     }
 
     public boolean eatFromBowl(int eat) {
-        if (isEmpty) {
+        if (countFood == 0) {
             System.out.println("Миск пуста");
             return false;
         } else if (eat <= countFood) {
@@ -40,7 +37,4 @@ public class FoodBowl {
         }
     }
 
-    public boolean isEmpty() {
-        return isEmpty;
-    }
 }

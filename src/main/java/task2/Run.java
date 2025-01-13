@@ -4,7 +4,7 @@ public class Run {
     public static void main(String[] args) {
         Triangle triangle = new Triangle(7, 5, 7, 10, "red", "black");
         Circle circle = new Circle(5, "green", "blue");
-        Rectangle rectangle = new Rectangle(10, 15, 10, 15, "pink", "purple");
+        Rectangle rectangle = new Rectangle(10, 15, "pink", "purple");
 
         System.out.println("Площадь треугольника: " + triangle.areaCalculation());
         System.out.println("Периметр треугольника: " + triangle.perimeterCalculation());
