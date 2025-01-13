@@ -34,18 +34,18 @@ public class Dog extends Animal {
 
     @Override
     public void run(int dist) {
-        if(dist < 500) {
+        if (dist < 500) {
             System.out.printf("Собака %s, пробежала %dм.\n", name, dist);
-        }else {
+        } else {
             System.out.printf("Собака за раз может пробежать только 500м.(Ваше значение %dм)\n", dist);
         }
     }
 
     @Override
     public void swim(int dist) {
-        if(dist<10){
+        if (dist < 10) {
             System.out.printf("Собака %s, проплыла %dм\n", name, dist);
-        }else {
+        } else {
             System.out.printf("Собака за раз может проплыть только 10м.(Ваше значени %dм)\n", dist);
         }
     }

@@ -5,7 +5,7 @@ public class Animal {
 
     private static int animalCounter = 0;
 
-    Animal(){
+    Animal() {
         animalCounter++;
     }
 
