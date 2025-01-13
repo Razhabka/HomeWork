@@ -8,11 +8,10 @@ public class Run {
                 {"2", "28", "44", "23" ,"35",}};
         try {
             System.out.println(arraySum(array));
-        } catch (MyArraySizeException e) {
-            e.printStackTrace();
-        } catch (MyArrayDataException e) {
+        } catch (MyArraySizeException | MyArrayDataException e) {
             e.printStackTrace();
         }
+
     }
 
     public static int arraySum(String[][] arr) throws MyArraySizeException, MyArrayDataException {
