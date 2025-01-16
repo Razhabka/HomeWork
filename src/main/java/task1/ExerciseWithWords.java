@@ -20,19 +20,19 @@ public class ExerciseWithWords {
     }
 
     public void countWord() {
-        List<String> example = new ArrayList<>(List.of(words));
-        example.sort(String::compareTo);
+        List<String> temporaryList = new ArrayList<>(List.of(words));
+        temporaryList.sort(String::compareTo);
 
-        while (!example.isEmpty()) {
-            if (example.lastIndexOf(example.get(0)) != 0) {
-                int lastIndex = example.lastIndexOf(example.get(0));
-                System.out.printf("Слово %s встречается: %d раз(а)\n", example.get(0), lastIndex + 1);
-                for (int i = 0; i <= lastIndex; i++) {
-                    example.remove(i);
+        while (!temporaryList.isEmpty()) {
+            if (temporaryList.lastIndexOf(temporaryList.get(0)) != 0) {
+                int lastIndexWord = temporaryList.lastIndexOf(temporaryList.get(0));
+                System.out.printf("Слово %s встречается: %d раз(а)\n", temporaryList.get(0), lastIndexWord + 1);
+                for (int i = 0; i <= lastIndexWord; i++) {
+                    temporaryList.remove(i);
                 }
             } else {
-                System.out.printf("Слово %s встречается: 1 раз\n", example.get(0));
-                example.remove(0);
+                System.out.printf("Слово %s встречается: 1 раз\n", temporaryList.get(0));
+                temporaryList.remove(0);
             }
         }
     }
