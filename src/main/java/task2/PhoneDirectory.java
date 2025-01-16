@@ -1,6 +1,5 @@
 package task2;
 
-import javax.swing.plaf.SplitPaneUI;
 import java.util.*;
 
 public class PhoneDirectory {
@@ -8,9 +7,9 @@ public class PhoneDirectory {
 
     public void add(String lastname, Integer phones) {
         if (phoneDirectory.containsKey(lastname)) {
-            List<Integer> oldNumbers = phoneDirectory.get(lastname);
-            oldNumbers.add(phones);
-            phoneDirectory.put(lastname, new ArrayList<>(oldNumbers));
+            List<Integer> newNumbers = phoneDirectory.get(lastname);
+            newNumbers.add(phones);
+            phoneDirectory.put(lastname, new ArrayList<>(newNumbers));
         } else {
             phoneDirectory.put(lastname, new ArrayList<>(Arrays.asList(phones)));
         }
