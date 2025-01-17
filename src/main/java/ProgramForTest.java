@@ -1,11 +1,11 @@
 public class ProgramForTest {
-    public static int factorial (int num) throws WrongArgumentException {
+    public static int factorial(int num) throws WrongArgumentException {
         try {
             if (num == 1) {
                 return 1;
             }
             return factorial(num - 1) * num;
-        }catch (StackOverflowError e){
+        } catch (StackOverflowError e) {
             throw new WrongArgumentException("Передан неверный аргумент");
         }
     }
