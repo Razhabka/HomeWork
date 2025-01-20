@@ -7,9 +7,7 @@ public class PhoneDirectory {
 
     public void add(String lastname, Integer phones) {
         if (phoneDirectory.containsKey(lastname)) {
-            List<Integer> newNumbers = phoneDirectory.get(lastname);
-            newNumbers.add(phones);
-            phoneDirectory.put(lastname, new ArrayList<>(newNumbers));
+            phoneDirectory.get(lastname).add(phones);
         } else {
             phoneDirectory.put(lastname, new ArrayList<>(Arrays.asList(phones)));
         }
