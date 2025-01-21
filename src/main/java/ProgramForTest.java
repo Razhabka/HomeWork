@@ -1,4 +1,5 @@
 import java.math.BigInteger;
+
 public class ProgramForTest {
     public static BigInteger factorial(BigInteger num) throws WrongArgumentException {
         if (num.longValue() == 1 || num.longValue() == 0) {

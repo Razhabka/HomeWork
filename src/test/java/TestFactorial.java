@@ -9,10 +9,12 @@ public class TestFactorial {
     public void factorialOneTest() throws WrongArgumentException {
         Assert.assertEquals(new BigInteger("1"), ProgramForTest.factorial(new BigInteger("0")));
     }
+
     @Test
     public void factorialZeroTest() throws WrongArgumentException {
         Assert.assertEquals(new BigInteger("1"), ProgramForTest.factorial(new BigInteger("0")));
     }
+
     @Test
     public void someValueTest() throws WrongArgumentException {
         SoftAssert asser = new SoftAssert();
