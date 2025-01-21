@@ -26,6 +26,6 @@ public class TestFactorial {
 
     @Test
     public void negativeNumberTest() throws WrongArgumentException {
-        Assert.assertThrows(WrongArgumentException.class, (Assert.ThrowingRunnable) ProgramForTest.factorial(new BigInteger("-5")));
+        Assert.assertThrows(WrongArgumentException.class, () -> ProgramForTest.factorial(new BigInteger("-5")));
     }
 }
