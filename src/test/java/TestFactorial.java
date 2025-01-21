@@ -1,33 +1,29 @@
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import java.math.BigInteger;
 
 public class TestFactorial {
     @Test
-    public void factorialOneTest() {
-        try {
-            Assert.assertEquals(1, ProgramForTest.factorial(1));
-        } catch (WrongArgumentException e) {
-        }
+    public void factorialOneTest() throws WrongArgumentException {
+        Assert.assertEquals(new BigInteger("1"), ProgramForTest.factorial(new BigInteger("0")));
     }
     @Test
-    public void factorialZeroTest(){
-        try {
-            ProgramForTest.factorial(0);
-        } catch (WrongArgumentException e) {
-        }
+    public void factorialZeroTest() throws WrongArgumentException {
+        Assert.assertEquals(new BigInteger("1"), ProgramForTest.factorial(new BigInteger("0")));
     }
     @Test
     public void someValueTest() throws WrongArgumentException {
-        Assert.assertEquals(24, ProgramForTest.factorial(4));
-        Assert.assertEquals(720, ProgramForTest.factorial(6));
-        Assert.assertEquals(40320, ProgramForTest.factorial(8));
+        SoftAssert asser = new SoftAssert();
+        asser.assertEquals(new BigInteger("24"), ProgramForTest.factorial(new BigInteger("4")));
+        asser.assertEquals(new BigInteger("720"), ProgramForTest.factorial(new BigInteger("6")));
+        asser.assertEquals(new BigInteger("40320"), ProgramForTest.factorial(new BigInteger("8")));
+        asser.assertAll();
     }
 
     @Test
-    public void negativeNumberTest(){
-        try {
-            ProgramForTest.factorial(-3);
-        } catch (WrongArgumentException e) {
-        }
+    public void negativeNumberTest() throws WrongArgumentException {
+        Assert.assertThrows(WrongArgumentException.class, (Assert.ThrowingRunnable) ProgramForTest.factorial(new BigInteger("-5")));
     }
 }
