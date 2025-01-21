@@ -17,11 +17,11 @@ public class TestFactorial {
 
     @Test
     public void someValueTest() throws WrongArgumentException {
-        SoftAssert asser = new SoftAssert();
-        asser.assertEquals(new BigInteger("24"), ProgramForTest.factorial(new BigInteger("4")));
-        asser.assertEquals(new BigInteger("720"), ProgramForTest.factorial(new BigInteger("6")));
-        asser.assertEquals(new BigInteger("40320"), ProgramForTest.factorial(new BigInteger("8")));
-        asser.assertAll();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(new BigInteger("24"), ProgramForTest.factorial(new BigInteger("4")));
+        softAssert.assertEquals(new BigInteger("720"), ProgramForTest.factorial(new BigInteger("6")));
+        softAssert.assertEquals(new BigInteger("40320"), ProgramForTest.factorial(new BigInteger("8")));
+        softAssert.assertAll();
     }
 
     @Test
