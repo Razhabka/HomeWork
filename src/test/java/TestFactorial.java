@@ -31,7 +31,7 @@ public class TestFactorial {
 
     @Test
     @Description("Тестирование отрицательных значений")
-    public void negativeNumberTest()  {
+    public void negativeNumberTest() {
         Assertions.assertThrows(WrongArgumentException.class, () -> ProgramForTesting.factorial(new BigInteger("-5")));
     }
 
