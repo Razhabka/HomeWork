@@ -5,7 +5,7 @@ public class SetUpDriver {
 
     private static WebDriver driver;
 
-    public static WebDriver setUp(){
+    public static WebDriver setUp() {
         WebDriverManager.chromedriver().setup();
         return driver;
     }
