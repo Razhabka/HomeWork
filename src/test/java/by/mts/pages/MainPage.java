@@ -48,18 +48,18 @@ public class MainPage extends BasePage {
         return getSumAndNumberPhone(payDescriptionSum.getText(), payDescriptionNumber.getText());
     }
 
-    private String getSumAndNumberPhone(String sum, String numberPhone){
+    private String getSumAndNumberPhone(String sum, String numberPhone) {
         String[] splitSum = sum.split("\\.");
         String[] splitNumber = numberPhone.split(":");
         return splitSum[0] + splitNumber[2];
     }
 
-    private static void acceptCookies(){
+    private static void acceptCookies() {
 
         try {
             WebElement webElement = driver.findElement(By.id("cookie-agree"));
             webElement.click();
-        }catch (NoSuchElementException | ElementNotInteractableException e){
+        } catch (NoSuchElementException | ElementNotInteractableException e) {
 
         }
     }

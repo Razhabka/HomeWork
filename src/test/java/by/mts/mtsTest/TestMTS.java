@@ -12,6 +12,7 @@ import org.openqa.selenium.WebElement;
 public class TestMTS extends SetUpDriver {
 
     private final MainPage mainPage = new MainPage();
+
     @Test
     @Description("Проверка названия блока")
     public void nameCheckTest() {
@@ -51,8 +52,8 @@ public class TestMTS extends SetUpDriver {
 
     @Test
     @Description("Проверка полей и кнопки")
-    public void fieldTest(){
-        String phoneNumber ="297777777";
+    public void fieldTest() {
+        String phoneNumber = "297777777";
         String sum = "100";
         String expected = sum + "375" + phoneNumber;
         Assertions.assertEquals(expected, mainPage.replenishment(phoneNumber, sum));

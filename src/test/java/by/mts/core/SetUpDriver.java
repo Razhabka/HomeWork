@@ -24,7 +24,7 @@ abstract public class SetUpDriver {
     }
 
     @AfterAll
-    public static void tearDown(){
+    public static void tearDown() {
         webDriver.close();
         webDriver.quit();
     }
