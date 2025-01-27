@@ -18,7 +18,7 @@ abstract public class SetUpDriver {
 //        WebDriverManager.chromedriver().setup();
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        webDriver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(20));
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         BasePage.setDriver(webDriver);
     }

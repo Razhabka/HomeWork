@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.HashMap;
 
 public class MainPage extends BasePage {
     @FindBy(id = "connection-phone")
@@ -56,25 +57,40 @@ public class MainPage extends BasePage {
     private WebElement homeInternet;
 
     @FindBy(xpath = "//ul[@class='select__list']/li[3]")
-    private WebElement installmentBtn;
+    private WebElement instalmentBtn;
 
     @FindBy(xpath = "//ul[@class='select__list']/li[4]")
     private WebElement arrearsBtn;
 
+    @FindBy(xpath = "//button[@class='colored disabled']")
+    WebElement payBtn;
+    //    плэйс-холдеры с попап меню
     @FindBy(xpath = "//div[@class='pay-description__text']/span")
     private WebElement payDescriptionNumber;
 
     @FindBy(xpath = "//div[@class='pay-description__cost']/span")
     private WebElement payDescriptionSum;
 
+    @FindBy(xpath = "//div[@class='content ng-tns-c46-1']/label[1]")
+    WebElement numberCardField;
+
+    @FindBy(xpath = "//div[@class='content ng-tns-c46-4']/label")
+    WebElement validityPeriodFiled;
+
+    @FindBy(xpath = "//div[@class='content ng-tns-c46-5']/label")
+    WebElement cvcFiled;
+
+    @FindBy(xpath = "//div[@class='content ng-tns-c46-3']/label")
+    WebElement nameHolderField;
+
 
     public MainPage() {
-        driver.get("https://www.mts.by/");
+        driver.get("https://www.mts.by");
         PageFactory.initElements(driver, this);
         acceptCookies();
     }
 
-    public String[] communSeviceText(){
+    public String[] communSeviceText() {
         String[] allPlaceHolders = new String[3];
         allPlaceHolders[0] = phoneNumberField.getAttribute("placeholder");
         allPlaceHolders[1] = sumField.getAttribute("placeholder");
@@ -82,7 +98,7 @@ public class MainPage extends BasePage {
         return allPlaceHolders;
     }
 
-    public String[] homeNetText(){
+    public String[] homeNetText() {
         selectHeaderBtn.click();
 //        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(new By.ByXPath("//li[2][@class='select__item active']")));
         homeInternet.click();
@@ -95,9 +111,9 @@ public class MainPage extends BasePage {
 
     }
 
-    public String[] installmentText(){
+    public String[] installmentText() {
         selectHeaderBtn.click();
-        installmentBtn.click();
+        instalmentBtn.click();
 
         String[] allPlaceHolders = new String[3];
         allPlaceHolders[0] = instalmentScore.getAttribute("placeholder");
@@ -106,7 +122,7 @@ public class MainPage extends BasePage {
         return allPlaceHolders;
     }
 
-    public String[] arrearsText(){
+    public String[] arrearsText() {
         selectHeaderBtn.click();
         arrearsBtn.click();
 
@@ -115,6 +131,26 @@ public class MainPage extends BasePage {
         allPlaceHolders[1] = arrearsSum.getAttribute("placeholder");
         allPlaceHolders[2] = arrearsEmail.getAttribute("placeholder");
         return allPlaceHolders;
+    }
+
+    public HashMap depositPopUpMenu(String phoneNumber, String depositValue) {
+        phoneNumberField.click();
+        phoneNumberField.sendKeys(phoneNumber);
+        sumField.click();
+        sumField.sendKeys(depositValue);
+        continueBtn.click();
+        driver.switchTo().frame(driver.findElement(new By.ByXPath("//iframe[@class='bepaid-iframe']")));
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(new By.ByXPath("//div[@class='pay-description__text']/span")));
+        HashMap<String, String> allItems = new HashMap<>();
+        allItems.put("Phone number", payDescriptionNumber.getText().split(":")[2]);
+        allItems.put("Deposit sum", payDescriptionSum.getText().split("\\.")[0]);
+        allItems.put("Card number placeholder", numberCardField.getText());
+        allItems.put("Validity period placeholder", validityPeriodFiled.getText());
+        allItems.put("CVC placeholder", cvcFiled.getText());
+        allItems.put("Holder's name placeholder", nameHolderField.getText());
+        allItems.put("Deposit sum on button", payBtn.getText());
+        return allItems;
+
     }
 
 
