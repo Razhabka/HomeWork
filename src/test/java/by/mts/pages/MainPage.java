@@ -1,6 +1,7 @@
 package by.mts.pages;
 
 import by.mts.core.BasePage;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -64,7 +65,9 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "//button[@class='colored disabled']")
     WebElement payBtn;
+
     //    плэйс-холдеры с попап меню
+
     @FindBy(xpath = "//div[@class='pay-description__text']/span")
     private WebElement payDescriptionNumber;
 
@@ -82,6 +85,21 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='content ng-tns-c46-3']/label")
     WebElement nameHolderField;
+
+//    Иконки платежных систем
+
+    @FindBy(xpath = "//div[@class='cards-brands cards-brands__container ng-tns-c61-0 ng-trigger ng-trigger-brandsState ng-star-inserted']/img[1]")
+    WebElement firstIconOnField;
+
+    @FindBy(xpath = "//div[@class='cards-brands cards-brands__container ng-tns-c61-0 ng-trigger ng-trigger-brandsState ng-star-inserted']/img[1]']")
+    WebElement secondIconOnField;
+
+    @FindBy(xpath = "//div[@class='cards-brands cards-brands__container ng-tns-c61-0 ng-trigger ng-trigger-brandsState ng-star-inserted']/img[1]']")
+    WebElement thirdOnField;
+
+    @FindBy(xpath = "//div[@class='cards-brands cards-brands_random ng-tns-c61-0 ng-star-inserted']/img']")
+    WebElement fourthIconOnField;
+
 
 
     public MainPage() {
@@ -148,9 +166,11 @@ public class MainPage extends BasePage {
         allItems.put("Validity period placeholder", validityPeriodFiled.getText());
         allItems.put("CVC placeholder", cvcFiled.getText());
         allItems.put("Holder's name placeholder", nameHolderField.getText());
-        allItems.put("Deposit sum on button", payBtn.getText());
+        allItems.put("Visa icon", firstIconOnField.getSize().toString());
+        allItems.put("Mastercard icon", secondIconOnField.getSize().toString());
+        allItems.put("Belkart icon", thirdOnField.getSize().toString());
+        allItems.put("Mir icon", fourthIconOnField.getSize().toString());
         return allItems;
-
     }
 
 

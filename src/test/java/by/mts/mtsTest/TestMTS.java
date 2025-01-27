@@ -68,7 +68,11 @@ public class TestMTS extends SetUpDriver {
                 () -> Assertions.assertEquals("Срок действия", actual.get("Validity period placeholder")),
                 () -> Assertions.assertEquals("CVC", actual.get("CVC placeholder")),
                 () -> Assertions.assertEquals("Имя держателя (как на карте)", actual.get("Holder's name placeholder")),
-                () -> Assertions.assertEquals(value, actual.get("Deposit sum on button"))
+                () -> Assertions.assertEquals(value, actual.get("Deposit sum on button")),
+                () -> Assertions.assertEquals("", actual.get("Visa icon")),
+                () -> Assertions.assertEquals("", actual.get("Mastercard icon")),
+                () -> Assertions.assertEquals("", actual.get("Belkart icon")),
+                () -> Assertions.assertEquals("", actual.get("Mir icon"))
         );
     }
 }
