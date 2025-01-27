@@ -59,7 +59,7 @@ public class TestMTS extends SetUpDriver {
     @Description("Проверка меню заполнения реквезитов")
     public void depositTest() {
         String phoneNumber = "297777777";
-        String value = "100";
+        String value = "100.00";
         HashMap<String, String> actual = mainPage.depositPopUpMenu(phoneNumber, value);
         Assertions.assertAll(
                 () -> Assertions.assertEquals(375 + phoneNumber, actual.get("Phone number")),
@@ -69,10 +69,10 @@ public class TestMTS extends SetUpDriver {
                 () -> Assertions.assertEquals("CVC", actual.get("CVC placeholder")),
                 () -> Assertions.assertEquals("Имя держателя (как на карте)", actual.get("Holder's name placeholder")),
                 () -> Assertions.assertEquals(value, actual.get("Deposit sum on button")),
-                () -> Assertions.assertEquals("", actual.get("Visa icon")),
-                () -> Assertions.assertEquals("", actual.get("Mastercard icon")),
-                () -> Assertions.assertEquals("", actual.get("Belkart icon")),
-                () -> Assertions.assertEquals("", actual.get("Mir icon"))
+                () -> Assertions.assertNotEquals("", actual.get("Visa icon")),
+                () -> Assertions.assertNotEquals("", actual.get("Mastercard icon")),
+                () -> Assertions.assertNotEquals("", actual.get("Belkart icon")),
+                () -> Assertions.assertNotEquals("", actual.get("Mir icon"))
         );
     }
 }

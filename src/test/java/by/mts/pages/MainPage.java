@@ -1,13 +1,13 @@
 package by.mts.pages;
 
 import by.mts.core.BasePage;
-import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.swing.text.html.Option;
 import java.time.Duration;
 import java.util.HashMap;
 
@@ -88,16 +88,16 @@ public class MainPage extends BasePage {
 
 //    Иконки платежных систем
 
-    @FindBy(xpath = "//div[@class='cards-brands cards-brands__container ng-tns-c61-0 ng-trigger ng-trigger-brandsState ng-star-inserted']/img[1]")
+    @FindBy(xpath = "/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[1]/app-input/div/div/div[2]/div/div/img[1]")
     WebElement firstIconOnField;
 
-    @FindBy(xpath = "//div[@class='cards-brands cards-brands__container ng-tns-c61-0 ng-trigger ng-trigger-brandsState ng-star-inserted']/img[1]']")
+    @FindBy(xpath = "/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[1]/app-input/div/div/div[2]/div/div/img[2]")
     WebElement secondIconOnField;
 
-    @FindBy(xpath = "//div[@class='cards-brands cards-brands__container ng-tns-c61-0 ng-trigger ng-trigger-brandsState ng-star-inserted']/img[1]']")
+    @FindBy(xpath = "/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[1]/app-input/div/div/div[2]/div/div/img[3]")
     WebElement thirdOnField;
 
-    @FindBy(xpath = "//div[@class='cards-brands cards-brands_random ng-tns-c61-0 ng-star-inserted']/img']")
+    @FindBy(xpath = "/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[1]/app-input/div/div/div[2]/div/div/div")
     WebElement fourthIconOnField;
 
 
@@ -161,11 +161,12 @@ public class MainPage extends BasePage {
         new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(new By.ByXPath("//div[@class='pay-description__text']/span")));
         HashMap<String, String> allItems = new HashMap<>();
         allItems.put("Phone number", payDescriptionNumber.getText().split(":")[2]);
-        allItems.put("Deposit sum", payDescriptionSum.getText().split("\\.")[0]);
+        allItems.put("Deposit sum", payDescriptionSum.getText().split(" ")[0]);
         allItems.put("Card number placeholder", numberCardField.getText());
         allItems.put("Validity period placeholder", validityPeriodFiled.getText());
         allItems.put("CVC placeholder", cvcFiled.getText());
         allItems.put("Holder's name placeholder", nameHolderField.getText());
+        allItems.put("Deposit sum on button", payBtn.getText().split(" ")[1]);
         allItems.put("Visa icon", firstIconOnField.getSize().toString());
         allItems.put("Mastercard icon", secondIconOnField.getSize().toString());
         allItems.put("Belkart icon", thirdOnField.getSize().toString());
@@ -178,7 +179,7 @@ public class MainPage extends BasePage {
         try {
             WebElement webElement = driver.findElement(By.id("cookie-agree"));
             webElement.click();
-        } catch (NoSuchElementException | ElementNotInteractableException e) {
+        } catch (NoSuchElementException | ElementNotInteractableException |StaleElementReferenceException e) {
         }
     }
 }
