@@ -75,7 +75,9 @@ public class TestMTS extends SetUpDriver {
                 () -> Assertions.assertEquals("true", actual.get("Visa icon")),
                 () -> Assertions.assertEquals("true", actual.get("Mastercard icon")),
                 () -> Assertions.assertEquals("true", actual.get("Belkart icon")),
-                () -> Assertions.assertEquals("true", actual.get("Mir icon"))
+                () -> Assertions.assertEquals("true", actual.get("Mir icon")),
+                () -> Assertions.assertThrows(Exception.class, () -> webDriver.findElement(By.xpath("//div[@class='cards-brands cards-brands__container ng-tns-c61-0 ng-trigger ng-trigger-brandsState ng-star-inserted']/img[4]"))),
+                () -> Assertions.assertThrows(Exception.class, () -> webDriver.findElement(By.xpath("//div[@class='cards-brands cards-brands_random ng-tns-c61-0 ng-star-inserted']/img[3]")))
         );
     }
 

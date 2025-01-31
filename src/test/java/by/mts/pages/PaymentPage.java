@@ -1,6 +1,8 @@
 package by.mts.pages;
 
 import by.mts.core.BasePage;
+import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -8,10 +10,9 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.HashMap;
 
 public class PaymentPage{
-
+//    Кнопки
     @FindBy(xpath = "//button[@class='colored disabled']")
     WebElement payBtn;
-
     //    плэйс-холдеры с попап меню
 
     @FindBy(xpath = "//div[@class='pay-description__text']/span")
@@ -63,6 +64,7 @@ public class PaymentPage{
         allItems.put("Mastercard icon", Boolean.toString(secondIconOnField.isDisplayed()));
         allItems.put("Belkart icon", Boolean.toString(thirdOnField.isDisplayed()));
         allItems.put("Mir icon", Boolean.toString(fourthIconOnField.isDisplayed()));
+
         return allItems;
     }
 
