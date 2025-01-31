@@ -43,8 +43,8 @@ public class MainPage extends BasePage {
         sumField.click();
         sumField.sendKeys(sum);
         continueBtn.click();
-        driver.switchTo().frame(driver.findElement(new By.ByXPath("//iframe[@class='bepaid-iframe']")));
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(new By.ByXPath("//div[@class='pay-description__text']/span")));
+        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']")));
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='pay-description__text']/span")));
         return getSumAndNumberPhone(payDescriptionSum.getText(), payDescriptionNumber.getText());
     }
 
@@ -54,7 +54,7 @@ public class MainPage extends BasePage {
         return splitSum[0] + splitNumber[2];
     }
 
-    private static void acceptCookies() {
+    public void acceptCookies() {
 
         try {
             WebElement webElement = driver.findElement(By.id("cookie-agree"));
