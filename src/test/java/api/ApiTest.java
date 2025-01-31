@@ -51,13 +51,13 @@ public class ApiTest {
                 () -> Assertions.assertEquals("443", headers.get("x-forwarded-port")),
                 () -> Assertions.assertTrue(headers.get("x-amzn-trace-id").contains("Root")),
                 () -> Assertions.assertEquals("gzip,deflate", headers.get("accept-encoding")),
-                () -> Assertions.assertEquals(URI+"/get?foo1=bar1&foo2=bar2", factualURL)
+                () -> Assertions.assertEquals(URI + "/get?foo1=bar1&foo2=bar2", factualURL)
         );
 
     }
 
     @Test
-    public void postRawTextTest(){
+    public void postRawTextTest() {
         Map<String, String> headers = given()
                 .log().body()
                 .baseUri(URI)
@@ -104,18 +104,18 @@ public class ApiTest {
                 () -> Assertions.assertEquals(Integer.toString(data.length()), headers.get("content-length")),
                 () -> Assertions.assertEquals(body, data),
                 () -> Assertions.assertEquals("text/plain; charset=ISO-8859-1", headers.get("content-type")),
-                () -> Assertions.assertEquals(URI+"/post", actualURL),
+                () -> Assertions.assertEquals(URI + "/post", actualURL),
                 () -> Assertions.assertNull(json)
         );
     }
 
     @Test
-    public void postFromDataTest(){
+    public void postFromDataTest() {
         Map<String, String> headers = given()
                 .log().body()
                 .baseUri(URI)
                 .contentType("application/x-www-form-urlencoded; charset=utf-8")
-                .formParam("foo1","bar1").formParam("foo2", "bar2")
+                .formParam("foo1", "bar1").formParam("foo2", "bar2")
                 .when()
                 .post("/post")
                 .then()
@@ -125,7 +125,7 @@ public class ApiTest {
         Map<String, String> form = given()
                 .baseUri(URI)
                 .contentType("application/x-www-form-urlencoded; charset=utf-8")
-                .formParam("foo1","bar1").formParam("foo2", "bar2")
+                .formParam("foo1", "bar1").formParam("foo2", "bar2")
                 .when()
                 .post("/post")
                 .then()
@@ -134,7 +134,7 @@ public class ApiTest {
         Map<String, String> json = given()
                 .baseUri(URI)
                 .contentType("application/x-www-form-urlencoded; charset=utf-8")
-                .formParam("foo1","bar1").formParam("foo2", "bar2")
+                .formParam("foo1", "bar1").formParam("foo2", "bar2")
                 .when()
                 .post("/post")
                 .then()
@@ -143,7 +143,7 @@ public class ApiTest {
         String actualUrl = given()
                 .baseUri(URI)
                 .contentType("application/x-www-form-urlencoded; charset=utf-8")
-                .formParam("foo1","bar1").formParam("foo2", "bar2")
+                .formParam("foo1", "bar1").formParam("foo2", "bar2")
                 .when()
                 .post("/post")
                 .then()
@@ -152,7 +152,7 @@ public class ApiTest {
         String data = given()
                 .baseUri(URI)
                 .contentType("application/x-www-form-urlencoded; charset=utf-8")
-                .formParam("foo1","bar1").formParam("foo2", "bar2")
+                .formParam("foo1", "bar1").formParam("foo2", "bar2")
                 .when()
                 .post("/post")
                 .then()
@@ -174,16 +174,14 @@ public class ApiTest {
                 () -> Assertions.assertEquals("bar2", form.get("foo2")),
                 () -> Assertions.assertEquals("bar1", json.get("foo1")),
                 () -> Assertions.assertEquals("bar2", json.get("foo2")),
-                () -> Assertions.assertEquals(URI+"/post", actualUrl)
+                () -> Assertions.assertEquals(URI + "/post", actualUrl)
         );
-
-
 
 
     }
 
     @Test
-    public void putRequestTest(){
+    public void putRequestTest() {
         Map<String, String> headers = given()
                 .log().body()
                 .baseUri(URI).contentType(ContentType.TEXT).body(body)
@@ -223,13 +221,13 @@ public class ApiTest {
                 () -> Assertions.assertEquals(body, data),
                 () -> Assertions.assertEquals(Integer.toString(data.length()), headers.get("content-length")),
                 () -> Assertions.assertEquals("text/plain; charset=ISO-8859-1", headers.get("content-type")),
-                () -> Assertions.assertEquals(URI+"/put", actualURL),
+                () -> Assertions.assertEquals(URI + "/put", actualURL),
                 () -> Assertions.assertNull(json)
         );
     }
 
     @Test
-    public void patchRequestTest(){
+    public void patchRequestTest() {
         Map<String, String> headers = given()
                 .log().body()
                 .baseUri(URI).contentType(ContentType.TEXT).body(body)
@@ -271,13 +269,13 @@ public class ApiTest {
                 () -> Assertions.assertEquals(body, data),
                 () -> Assertions.assertEquals(Integer.toString(data.length()), headers.get("content-length")),
                 () -> Assertions.assertEquals("text/plain; charset=ISO-8859-1", headers.get("content-type")),
-                () -> Assertions.assertEquals(URI+"/patch", actualURL),
+                () -> Assertions.assertEquals(URI + "/patch", actualURL),
                 () -> Assertions.assertNull(json)
         );
     }
 
     @Test
-    public void deleteRequestTest(){
+    public void deleteRequestTest() {
         Map<String, String> headers = given()
                 .log().body()
                 .baseUri(URI).contentType(ContentType.TEXT).body(body)
@@ -322,7 +320,7 @@ public class ApiTest {
                 () -> Assertions.assertEquals(body, data),
                 () -> Assertions.assertEquals(Integer.toString(data.length()), headers.get("content-length")),
                 () -> Assertions.assertEquals("text/plain; charset=ISO-8859-1", headers.get("content-type")),
-                () -> Assertions.assertEquals(URI+"/delete", actualURL),
+                () -> Assertions.assertEquals(URI + "/delete", actualURL),
                 () -> Assertions.assertNull(json)
         );
     }
