@@ -9,8 +9,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.HashMap;
 
-public class PaymentPage{
-//    Кнопки
+public class PaymentPage {
+    //    Кнопки
     @FindBy(xpath = "//button[@class='colored disabled']")
     WebElement payBtn;
     //    плэйс-холдеры с попап меню
@@ -51,7 +51,7 @@ public class PaymentPage{
         PageFactory.initElements(MainPage.getDriver(), this);
     }
 
-    public HashMap windowEnteringBankDetails(){
+    public HashMap windowEnteringBankDetails() {
         HashMap<String, String> allItems = new HashMap<>();
         allItems.put("Phone number", payDescriptionNumber.getText().split(":")[2]);
         allItems.put("Deposit sum", payDescriptionSum.getText().split(" ")[0]);
@@ -68,7 +68,7 @@ public class PaymentPage{
         return allItems;
     }
 
-    public String getTextSumAndNumber(){
+    public String getTextSumAndNumber() {
         return payDescriptionSum.getText().split("\\.")[0] + payDescriptionNumber.getText().split(":")[2];
     }
 

@@ -65,7 +65,6 @@ public class MainPage extends BasePage {
     private WebElement arrearsBtn;
 
 
-
     public MainPage() {
         driver.get("https://www.mts.by");
         PageFactory.initElements(driver, this);
@@ -142,7 +141,7 @@ public class MainPage extends BasePage {
     }
 
 
-    public static WebDriver getDriver(){
+    public static WebDriver getDriver() {
         return driver;
     }
 
@@ -151,7 +150,7 @@ public class MainPage extends BasePage {
         try {
             WebElement webElement = driver.findElement(By.id("cookie-agree"));
             webElement.click();
-        } catch (NoSuchElementException | ElementNotInteractableException |StaleElementReferenceException e) {
+        } catch (NoSuchElementException | ElementNotInteractableException | StaleElementReferenceException e) {
         }
     }
 }

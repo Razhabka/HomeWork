@@ -81,18 +81,18 @@ public class TestMTS extends SetUpDriver {
         );
     }
 
-//Тесты из 15 работы
-@Test
-@Description("Проверка названия блока")
-public void nameCheckTest() {
-    MainPage mainPage = new MainPage();
-    WebElement element = webDriver.findElement(By.xpath("//div[@class='pay__wrapper']/h2"));
-    Assertions.assertAll(
-            () -> Assertions.assertEquals("Онлайн пополнение\nбез комиссии", element.getText()),
-            () -> Assertions.assertNotNull(element.getSize())
-    );
+    //Тесты из 15 работы
+    @Test
+    @Description("Проверка названия блока")
+    public void nameCheckTest() {
+        MainPage mainPage = new MainPage();
+        WebElement element = webDriver.findElement(By.xpath("//div[@class='pay__wrapper']/h2"));
+        Assertions.assertAll(
+                () -> Assertions.assertEquals("Онлайн пополнение\nбез комиссии", element.getText()),
+                () -> Assertions.assertNotNull(element.getSize())
+        );
 
-}
+    }
 
 
     @Test
