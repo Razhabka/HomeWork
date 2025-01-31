@@ -7,6 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import javax.naming.ldap.LdapReferralException;
 import javax.swing.text.html.Option;
 import java.time.Duration;
 import java.util.HashMap;
@@ -62,43 +63,6 @@ public class MainPage extends BasePage {
 
     @FindBy(xpath = "//ul[@class='select__list']/li[4]")
     private WebElement arrearsBtn;
-
-    @FindBy(xpath = "//button[@class='colored disabled']")
-    WebElement payBtn;
-
-    //    плэйс-холдеры с попап меню
-
-    @FindBy(xpath = "//div[@class='pay-description__text']/span")
-    private WebElement payDescriptionNumber;
-
-    @FindBy(xpath = "//div[@class='pay-description__cost']/span")
-    private WebElement payDescriptionSum;
-
-    @FindBy(xpath = "//div[@class='content ng-tns-c46-1']/label[1]")
-    WebElement numberCardField;
-
-    @FindBy(xpath = "//div[@class='content ng-tns-c46-4']/label")
-    WebElement validityPeriodFiled;
-
-    @FindBy(xpath = "//div[@class='content ng-tns-c46-5']/label")
-    WebElement cvcFiled;
-
-    @FindBy(xpath = "//div[@class='content ng-tns-c46-3']/label")
-    WebElement nameHolderField;
-
-//    Иконки платежных систем
-
-    @FindBy(xpath = "/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[1]/app-input/div/div/div[2]/div/div/img[1]")
-    WebElement firstIconOnField;
-
-    @FindBy(xpath = "/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[1]/app-input/div/div/div[2]/div/div/img[2]")
-    WebElement secondIconOnField;
-
-    @FindBy(xpath = "/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[1]/app-input/div/div/div[2]/div/div/img[3]")
-    WebElement thirdOnField;
-
-    @FindBy(xpath = "/html/body/app-root/div/div/div/app-payment-container/section/div/app-card-page/div/div[1]/app-card-input/form/div[1]/div[1]/app-input/div/div/div[2]/div/div/div")
-    WebElement fourthIconOnField;
 
 
 
@@ -159,23 +123,31 @@ public class MainPage extends BasePage {
         continueBtn.click();
         driver.switchTo().frame(driver.findElement(new By.ByXPath("//iframe[@class='bepaid-iframe']")));
         new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(new By.ByXPath("//div[@class='pay-description__text']/span")));
-        HashMap<String, String> allItems = new HashMap<>();
-        allItems.put("Phone number", payDescriptionNumber.getText().split(":")[2]);
-        allItems.put("Deposit sum", payDescriptionSum.getText().split(" ")[0]);
-        allItems.put("Card number placeholder", numberCardField.getText());
-        allItems.put("Validity period placeholder", validityPeriodFiled.getText());
-        allItems.put("CVC placeholder", cvcFiled.getText());
-        allItems.put("Holder's name placeholder", nameHolderField.getText());
-        allItems.put("Deposit sum on button", payBtn.getText().split(" ")[1]);
-        allItems.put("Visa icon", firstIconOnField.getSize().toString());
-        allItems.put("Mastercard icon", secondIconOnField.getSize().toString());
-        allItems.put("Belkart icon", thirdOnField.getSize().toString());
-        allItems.put("Mir icon", fourthIconOnField.getSize().toString());
-        return allItems;
+        PaymentPage paymentPage = new PaymentPage();
+
+        return paymentPage.windowEnteringBankDetails();
+    }
+
+    public String replenishment(String phoneNumber, String sum) {
+
+        phoneNumberField.click();
+        phoneNumberField.sendKeys(phoneNumber);
+        sumField.click();
+        sumField.sendKeys(sum);
+        continueBtn.click();
+        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@class='bepaid-iframe']")));
+        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='pay-description__text']/span")));
+        PaymentPage paymentPage = new PaymentPage();
+        return paymentPage.getTextSumAndNumber();
     }
 
 
-    private static void acceptCookies() {
+    public static WebDriver getDriver(){
+        return driver;
+    }
+
+
+    public static void acceptCookies() {
         try {
             WebElement webElement = driver.findElement(By.id("cookie-agree"));
             webElement.click();
