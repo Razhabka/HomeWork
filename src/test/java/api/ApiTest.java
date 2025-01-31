@@ -1,15 +1,11 @@
 package api;
 
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.security.PublicKey;
 import java.util.*;
-import java.util.stream.Stream;
 
 import static io.restassured.RestAssured.given;
 
