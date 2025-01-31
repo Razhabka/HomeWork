@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.security.PublicKey;
 import java.util.*;
+import java.util.stream.Stream;
 
 import static io.restassured.RestAssured.given;
 
@@ -19,16 +20,24 @@ public class ApiTest {
     @Test
     public void getRequestsTest() {
         Map<String, String> headers = given().baseUri(URI)
-                .when().get("/get?foo1=bar1&foo2=bar2")
-                .then().log().body().statusCode(HttpStatus.SC_OK)
-                .extract().jsonPath().getMap("headers", String.class, String.class);
-        Map<String, String> args = given().baseUri(URI)
-                .when().get("/get?foo1=bar1&foo2=bar2")
+                .when()
+                .get("/get?foo1=bar1&foo2=bar2")
                 .then()
+                .log().body()
+                .statusCode(HttpStatus.SC_OK)
+                .extract()
+                .jsonPath().getMap("headers", String.class, String.class);
+        Map<String, String> args = given().baseUri(URI)
+                .when()
+                .get("/get?foo1=bar1&foo2=bar2")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
                 .extract().jsonPath().getMap("args", String.class, String.class);
         String factualURL = given().baseUri(URI)
-                .when().get("/get?foo1=bar1&foo2=bar2")
+                .when()
+                .get("/get?foo1=bar1&foo2=bar2")
                 .then()
+                .statusCode(HttpStatus.SC_OK)
                 .extract().jsonPath().getString("url");
 
         Assertions.assertAll(
@@ -51,23 +60,38 @@ public class ApiTest {
     public void postRawTextTest(){
         Map<String, String> headers = given()
                 .log().body()
-                .baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().post("/post")
-                .then().log().body()
+                .baseUri(URI)
+                .contentType(ContentType.TEXT).body(body)
+                .when()
+                .post("/post")
+                .then()
+                .log().body()
                 .statusCode(HttpStatus.SC_OK)
                 .extract().jsonPath().getMap("headers", String.class, String.class);
         String data = given().
-                baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().post("/post")
-                .then().extract().jsonPath().getString("data");
+                baseUri(URI)
+                .contentType(ContentType.TEXT).body(body)
+                .when()
+                .post("/post")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("data");
         String actualURL = given().
-                baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().post("/post")
-                .then().extract().jsonPath().getString("url");
+                baseUri(URI)
+                .contentType(ContentType.TEXT).body(body)
+                .when()
+                .post("/post")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("url");
         String json = given().
-                baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().post("/post")
-                .then().extract().jsonPath().getString("json");
+                baseUri(URI)
+                .contentType(ContentType.TEXT).body(body)
+                .when()
+                .post("/post")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("json");
 
         Assertions.assertAll(
                 () -> Assertions.assertEquals(URI.split("//")[1], headers.get("host")),
@@ -89,12 +113,72 @@ public class ApiTest {
     public void postFromDataTest(){
         Map<String, String> headers = given()
                 .log().body()
-                .baseUri(URI).contentType(ContentType.URLENC)
-                .formParam("foo1", "bar1").formParam("foo2", "body2")
-                .when().post("/post")
-                .then().log().body()
+                .baseUri(URI)
+                .contentType("application/x-www-form-urlencoded; charset=utf-8")
+                .formParam("foo1","bar1").formParam("foo2", "bar2")
+                .when()
+                .post("/post")
+                .then()
+                .log().body()
                 .statusCode(HttpStatus.SC_OK)
                 .extract().jsonPath().getMap("headers", String.class, String.class);
+        Map<String, String> form = given()
+                .baseUri(URI)
+                .contentType("application/x-www-form-urlencoded; charset=utf-8")
+                .formParam("foo1","bar1").formParam("foo2", "bar2")
+                .when()
+                .post("/post")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getMap("form", String.class, String.class);
+        Map<String, String> json = given()
+                .baseUri(URI)
+                .contentType("application/x-www-form-urlencoded; charset=utf-8")
+                .formParam("foo1","bar1").formParam("foo2", "bar2")
+                .when()
+                .post("/post")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getMap("json", String.class, String.class);
+        String actualUrl = given()
+                .baseUri(URI)
+                .contentType("application/x-www-form-urlencoded; charset=utf-8")
+                .formParam("foo1","bar1").formParam("foo2", "bar2")
+                .when()
+                .post("/post")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("url");
+        String data = given()
+                .baseUri(URI)
+                .contentType("application/x-www-form-urlencoded; charset=utf-8")
+                .formParam("foo1","bar1").formParam("foo2", "bar2")
+                .when()
+                .post("/post")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("data");
+
+
+        Assertions.assertAll(
+                () -> Assertions.assertEquals(URI.split("//")[1], headers.get("host")),
+                () -> Assertions.assertEquals(15, headers.get("x-request-start").length()),
+                () -> Assertions.assertTrue(headers.get("x-request-start").contains("t")),
+                () -> Assertions.assertEquals("close", headers.get("connection")),
+                () -> Assertions.assertEquals("https", headers.get("x-forwarded-proto")),
+                () -> Assertions.assertEquals("443", headers.get("x-forwarded-port")),
+                () -> Assertions.assertTrue(headers.get("x-amzn-trace-id").contains("Root")),
+                () -> Assertions.assertEquals("19", headers.get("content-length")),
+                () -> Assertions.assertEquals("", data),
+                () -> Assertions.assertEquals("bar1", form.get("foo1")),
+                () -> Assertions.assertEquals("bar2", form.get("foo2")),
+                () -> Assertions.assertEquals("bar1", json.get("foo1")),
+                () -> Assertions.assertEquals("bar2", json.get("foo2")),
+                () -> Assertions.assertEquals(URI+"/post", actualUrl)
+        );
+
+
+
 
     }
 
@@ -109,16 +193,25 @@ public class ApiTest {
                 .extract().jsonPath().getMap("headers", String.class, String.class);
         String data = given().
                 baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().put("/put")
-                .then().extract().jsonPath().getString("data");
+                .when()
+                .put("/put")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("data");
         String actualURL = given().
                 baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().put("/put")
-                .then().extract().jsonPath().getString("url");
+                .when()
+                .put("/put")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("url");
         String json = given().
                 baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().put("/put")
-                .then().extract().jsonPath().getString("json");
+                .when()
+                .put("/put")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("json");
         Assertions.assertAll(
                 () -> Assertions.assertEquals(URI.split("//")[1], headers.get("host")),
                 () -> Assertions.assertEquals(15, headers.get("x-request-start").length()),
@@ -140,22 +233,33 @@ public class ApiTest {
         Map<String, String> headers = given()
                 .log().body()
                 .baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().patch("/patch")
-                .then().log().body()
+                .when()
+                .patch("/patch")
+                .then()
+                .log().body()
                 .statusCode(HttpStatus.SC_OK)
                 .extract().jsonPath().getMap("headers", String.class, String.class);
         String data = given().
                 baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().patch("/patch")
-                .then().extract().jsonPath().getString("data");
+                .when()
+                .patch("/patch")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("data");
         String actualURL = given().
                 baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().patch("/patch")
-                .then().extract().jsonPath().getString("url");
+                .when()
+                .patch("/patch")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("url");
         String json = given().
                 baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().patch("/patch")
-                .then().extract().jsonPath().getString("json");
+                .when()
+                .patch("/patch")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("json");
         Assertions.assertAll(
                 () -> Assertions.assertEquals(URI.split("//")[1], headers.get("host")),
                 () -> Assertions.assertEquals(15, headers.get("x-request-start").length()),
@@ -177,22 +281,36 @@ public class ApiTest {
         Map<String, String> headers = given()
                 .log().body()
                 .baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().delete("/delete")
-                .then().log().body()
+                .when()
+                .delete("/delete")
+                .then()
+                .log().body()
                 .statusCode(HttpStatus.SC_OK)
                 .extract().jsonPath().getMap("headers", String.class, String.class);
         String data = given().
-                baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().delete("/delete")
-                .then().extract().jsonPath().getString("data");
+                baseUri(URI)
+                .contentType(ContentType.TEXT).body(body)
+                .when()
+                .delete("/delete")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("data");
         String actualURL = given().
-                baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().delete("/delete")
-                .then().extract().jsonPath().getString("url");
+                baseUri(URI)
+                .contentType(ContentType.TEXT).body(body)
+                .when()
+                .delete("/delete")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("url");
         String json = given().
-                baseUri(URI).contentType(ContentType.TEXT).body(body)
-                .when().delete("/delete")
-                .then().extract().jsonPath().getString("json");
+                baseUri(URI)
+                .contentType(ContentType.TEXT).body(body)
+                .when()
+                .delete("/delete")
+                .then()
+                .statusCode(HttpStatus.SC_OK)
+                .extract().jsonPath().getString("json");
         Assertions.assertAll(
                 () -> Assertions.assertEquals(URI.split("//")[1], headers.get("host")),
                 () -> Assertions.assertEquals(15, headers.get("x-request-start").length()),
