@@ -1,31 +1,37 @@
 package by.mts.mtsTest;
 
 import by.mts.core.SetUpDriver;
+import by.mts.core.TestListener;
 import by.mts.pages.MainPage;
 import jdk.jfr.Description;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.HashMap;
 
-
+@ExtendWith(TestListener.class)
 public class TestMTS extends SetUpDriver {
 
     @Test
-    @Description("Проверка надписи полей 'Услуга связи'")
+    @DisplayName("Проверка плэйсхолдеров полей \"Услуги связи\"")
+    @Description("")
     public void comServiceTest() {
         MainPage mainPage = new MainPage();
         Assertions.assertAll(
-                () -> Assertions.assertEquals("Номер телефона", mainPage.communSeviceText()[0]),
+                () -> Assertions.assertEquals("Номvер телефона", mainPage.communSeviceText()[0]),
                 () -> Assertions.assertEquals("Сумма", mainPage.communSeviceText()[1]),
                 () -> Assertions.assertEquals("E-mail для отправки чека", mainPage.communSeviceText()[2])
         );
     }
 
     @Test
-    @Description("Проверка надписи полей'Домашний интернет'")
+    @DisplayName("Проверка надписи полей\"Домашний интернет\"")
+    @Description("")
     public void homeInternetTest() {
         MainPage mainPage = new MainPage();
         Assertions.assertAll(
@@ -36,7 +42,8 @@ public class TestMTS extends SetUpDriver {
     }
 
     @Test
-    @Description("Проверка надписей полей 'Рассрочка'")
+    @DisplayName("Проверка надписей полей \"Рассрочка\"")
+    @Description("")
     public void installmentTest() {
         MainPage mainPage = new MainPage();
         Assertions.assertAll(
@@ -47,7 +54,8 @@ public class TestMTS extends SetUpDriver {
     }
 
     @Test
-    @Description("Проверка надписей полей 'Рассрочка'")
+    @DisplayName("Проверка надписей полей \"Задолженность\"")
+    @Description("")
     public void arrearsTest() {
         MainPage mainPage = new MainPage();
         Assertions.assertAll(
@@ -58,7 +66,8 @@ public class TestMTS extends SetUpDriver {
     }
 
     @Test
-    @Description("Проверка меню заполнения реквезитов")
+    @DisplayName("Проверка меню заполнения реквезитов")
+    @Description("")
     public void depositTest() {
         MainPage mainPage = new MainPage();
         String phoneNumber = "297777777";
@@ -83,7 +92,8 @@ public class TestMTS extends SetUpDriver {
 
     //Тесты из 15 работы
     @Test
-    @Description("Проверка названия блока")
+    @DisplayName("Проверка названия блока оплаты")
+    @Description("")
     public void nameCheckTest() {
         MainPage mainPage = new MainPage();
         WebElement element = webDriver.findElement(By.xpath("//div[@class='pay__wrapper']/h2"));
@@ -93,10 +103,8 @@ public class TestMTS extends SetUpDriver {
         );
 
     }
-
-
     @Test
-
+    @DisplayName("Проверка отображения логотипов платежный систем")
     public void checkLogoPaySys() {
         MainPage mainPage = new MainPage();
         Assertions.assertAll(
@@ -110,7 +118,7 @@ public class TestMTS extends SetUpDriver {
     }
 
     @Test
-    @Description("Проверка ссылки (Подробнее о сервисах)")
+    @DisplayName("Проверка ссылки \"Подробнее о сервисах\"")
     public void checkLink() {
         MainPage mainPage = new MainPage();
         WebElement webElement = webDriver.findElement(By.xpath("//div/a[@href=\"/help/poryadok-oplaty-i-bezopasnost-internet-platezhey/\"]"));
@@ -125,7 +133,7 @@ public class TestMTS extends SetUpDriver {
     }
 
     @Test
-    @Description("Проверка полей и кнопки")
+    @DisplayName("Проверка полей и кнопки")
     public void fieldTest() {
         MainPage mainPage = new MainPage();
         String phoneNumber = "297777777";
@@ -134,4 +142,6 @@ public class TestMTS extends SetUpDriver {
 
 
     }
+
+
 }
