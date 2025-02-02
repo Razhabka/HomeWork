@@ -23,10 +23,10 @@ abstract public class SetUpDriver {
         BasePage.setDriver(webDriver);
     }
 
-//    @AfterAll
-//    public static void tearDown() {
-//        webDriver.close();
-//        webDriver.quit();
-//    }
+    @AfterAll
+    public static void tearDown() {
+        webDriver.close();
+        webDriver.quit();
+    }
 
 }
