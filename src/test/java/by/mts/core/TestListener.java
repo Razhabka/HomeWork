@@ -15,6 +15,6 @@ public class TestListener implements TestWatcher {
 
     @Override
     public void testFailed(ExtensionContext context, Throwable cause) {
-        Allure.getLifecycle().addAttachment("screenshot", "imge/file", ".png",((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
+        Allure.getLifecycle().addAttachment("screenshot", "img/file", ".png",((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES));
     }
 }

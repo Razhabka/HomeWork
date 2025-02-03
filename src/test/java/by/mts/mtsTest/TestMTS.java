@@ -19,7 +19,6 @@ public class TestMTS extends SetUpDriver {
 
     @Test
     @DisplayName("Проверка плэйсхолдеров полей \"Услуги связи\"")
-    @Description("")
     public void comServiceTest() {
         MainPage mainPage = new MainPage();
         Assertions.assertAll(
@@ -31,7 +30,6 @@ public class TestMTS extends SetUpDriver {
 
     @Test
     @DisplayName("Проверка надписи полей\"Домашний интернет\"")
-    @Description("")
     public void homeInternetTest() {
         MainPage mainPage = new MainPage();
         Assertions.assertAll(
@@ -43,7 +41,6 @@ public class TestMTS extends SetUpDriver {
 
     @Test
     @DisplayName("Проверка надписей полей \"Рассрочка\"")
-    @Description("")
     public void installmentTest() {
         MainPage mainPage = new MainPage();
         Assertions.assertAll(
@@ -55,7 +52,6 @@ public class TestMTS extends SetUpDriver {
 
     @Test
     @DisplayName("Проверка надписей полей \"Задолженность\"")
-    @Description("")
     public void arrearsTest() {
         MainPage mainPage = new MainPage();
         Assertions.assertAll(
@@ -67,7 +63,6 @@ public class TestMTS extends SetUpDriver {
 
     @Test
     @DisplayName("Проверка меню заполнения реквезитов")
-    @Description("")
     public void depositTest() {
         MainPage mainPage = new MainPage();
         String phoneNumber = "297777777";
@@ -93,7 +88,6 @@ public class TestMTS extends SetUpDriver {
     //Тесты из 15 работы
     @Test
     @DisplayName("Проверка названия блока оплаты")
-    @Description("")
     public void nameCheckTest() {
         MainPage mainPage = new MainPage();
         WebElement element = webDriver.findElement(By.xpath("//div[@class='pay__wrapper']/h2"));
